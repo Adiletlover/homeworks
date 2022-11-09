@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Login</title>
+</head>
+<body>
+
+    <script type="text/javascript">
+
+        function checkForm(form)
+        {
+          if(form.username.value == "") {
+            alert("Ошибка: имя пользователя не может быть пустым!");
+            form.username.focus();
+            return false;
+          }
+          re = /^\w+$/;
+          if(!re.test(form.username.value)) {
+            alert("Ошибка: имя пользователя должно содержать только буквы, цифры и символы подчеркивания!");
+            form.username.focus();
+            return false;
+          }
+      
+          if(form.pwd1.value != "" && form.pwd1.value == form.pwd2.value) {
+            if(form.pwd1.value.length < 6) {
+              alert("Ошибка: пароль должен содержать не менее шести символов!");
+              form.pwd1.focus();
+              return false;
+            }
+            if(form.pwd1.value == form.username.value) {
+              alert("Ошибка: пароль должен отличаться от имени пользователя!");
+              form.pwd1.focus();
+              return false;
+            }
+            re = /[0-9]/;
+            if(!re.test(form.pwd1.value)) {
+              alert("Ошибка: пароль должен содержать хотя бы одну цифру (0-9)!");
+              form.pwd1.focus();
+              return false;
+            }
+            re = /[a-z]/;
+            if(!re.test(form.pwd1.value)) {
+              alert("Ошибка: пароль должен содержать хотя бы одну строчную букву (a-z)!");
+              form.pwd1.focus();
+              return false;
+            }
+            re = /[A-Z]/;
+            if(!re.test(form.pwd1.value)) {
+              alert("Ошибка: пароль должен содержать хотя бы одну заглавную букву (A-Z)!");
+              form.pwd1.focus();
+              return false;
+            }
+          } else {
+            alert("Ошибка: Пожалуйста, убедитесь, что вы ввели и подтвердили свой пароль!");
+            form.pwd1.focus();
+            return false;
+          }
+      
+          alert("Вы ввели правильный пароль: " + form.pwd1.value);
+          return true;
+        }
+    </script>
+    <button id="btnId">Click Me</button>
+    <div class="conteiner">
+        <h1>Sing In</h1>
+        <form ... onsubmit="return checkForm(this);">
+            <div class="formControl">
+                <input type="text" placeholder="Username" name="username"/>
+            </div>
+            <div class="formControl">
+                <input type="password" placeholder="Password*" name="pwd1" />
+            </div>
+            <div class="formControl">
+                <input type="password" placeholder="Confirm Password*" name="pwd2" />
+            </div>
+            <button class="btn">Login</button>
+        </form>
+    </div>
+</body>
+<script src="./index.js"></script>
+</html>
